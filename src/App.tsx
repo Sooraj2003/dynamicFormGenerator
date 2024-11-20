@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import  { useState } from 'react';
+import DynamicFormGenerator from './components/DynamicFormGenerator';
 
-function App() {
+const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`h-[5000px] ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+      <button
+        onClick={toggleDarkMode}
+        className="absolute top-4 right-4 px-2 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+      >
+        Toggle Dark Mode
+      </button>
+      <DynamicFormGenerator mode={darkMode}/>
     </div>
   );
-}
+};
 
 export default App;
